@@ -7,6 +7,7 @@ addons:
     - libboost-test-dev
     - libspdlog-dev
 script:
+- apt-get install python3-dev
 - pip3 install conan
 - mkdir build && cd build
 - conan install ..
