@@ -54,4 +54,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(range_tests test_version)
+add_test(range_tests bin/test_version)
