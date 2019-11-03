@@ -8,7 +8,7 @@ addons:
     - libspdlog-dev
 script:
 - sudo pip install conan --ignore-installed
-- mkdir build && cd build
+#- mkdir build && cd build
 - conan install ..
 - cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 - cmake --build .
