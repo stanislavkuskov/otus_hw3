@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 project(range VERSION 0.0.1$ENV{TRAVIS_BUILD_NUMBER})
 
-include(${CMAKE_BINARY_DIR}/build/conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 set(CMAKE_CXX_STANDARD 17)
