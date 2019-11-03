@@ -7,7 +7,7 @@ addons:
     - libboost-test-dev
     - libspdlog-dev
 script:
-- sudo pip install conan --ignore-installed
+#- sudo pip install conan --ignore-installed
 #- mkdir build && cd build
 #- conan install .
 #- cmake . -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
