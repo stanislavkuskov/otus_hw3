@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <range/v3/all.hpp>
 
 using ipPoolVector = std::vector<std::vector<int>>;
 
@@ -32,7 +33,7 @@ void printIpPool(const ipPoolVector &ip_pool)
 }
 
 void reverseSortIpPool(ipPoolVector &ip_pool){
-    std::sort(ip_pool.rbegin(), ip_pool.rend());
+    ranges::sort(ip_pool, std::greater<>());
 }
 
 std::vector<std::string> split(const std::string &str, char d)
