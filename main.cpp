@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 #include <range/v3/algorithm/any_of.hpp>
 #include <range/v3/algorithm/copy_if.hpp>
+#include <range/v3/algorithm/equal.hpp>
 #include <range/v3/algorithm/sort.hpp>
 
 using ipPoolVector = std::vector<std::vector<int>>;
@@ -80,10 +80,11 @@ template<typename... Args>
 ipPoolVector filterIpPool(const ipPoolVector &ip_pool, Args const & ... args){
     ipPoolVector filtered_ip_pool;
     std::vector<int> values = {args...};
-    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(filtered_ip_pool), [&values](const auto ip)
-                 {
-                     return std::equal(ip.begin(), ip.begin() + values.size(), values.begin());
-                 }
+    ranges::copy_if(ip_pool.begin(), ip_pool.end(), ranges::back_inserter(filtered_ip_pool), [&values](const auto ip)
+         {
+             bool b = ranges::equal(ip.begin(), ip.begin() + values.size(), values.begin());
+             return b;
+         }
     );
     return filtered_ip_pool;
 }
