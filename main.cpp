@@ -6,6 +6,7 @@
 #include <range/v3/algorithm/copy_if.hpp>
 #include <range/v3/algorithm/equal.hpp>
 #include <range/v3/algorithm/sort.hpp>
+#include <range/v3/algorithm/for_each.hpp>
 
 using ipPoolVector = std::vector<std::vector<int>>;
 
@@ -21,18 +22,15 @@ std::vector<int> toInt(const std::vector<std::string> &ip)
 
 void printIpPool(const ipPoolVector &ip_pool)
 {
-    for (const auto &ip : ip_pool)
-    {
-        for (auto oct = ip.cbegin(); oct != ip.cend(); ++oct)
-        {
-            if (oct != ip.cbegin())
-            {
-                std::cout << ".";
-            }
-            std::cout << *oct;
-        }
+    ranges::for_each(ip_pool, [](std::vector<int> ip){
+        int value = 0;
+        ranges::for_each(ip, [&value](int oct){
+            if (value != 0) std::cout << ".";
+            std::cout << oct;
+            ++value;
+        });
         std::cout << std::endl;
-    }
+    });
 }
 
 void reverseSortIpPool(ipPoolVector &ip_pool){
