@@ -2,7 +2,10 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <range/v3/all.hpp>
+
+#include <range/v3/algorithm/any_of.hpp>
+#include <range/v3/algorithm/copy_if.hpp>
+#include <range/v3/algorithm/sort.hpp>
 
 using ipPoolVector = std::vector<std::vector<int>>;
 
@@ -58,13 +61,17 @@ std::vector<std::string> split(const std::string &str, char d)
 
 ipPoolVector filterIpPoolAny(const ipPoolVector& ip_pool, const int& value){
     ipPoolVector filtered_ip_pool;
-    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(filtered_ip_pool), [&value](const auto ip)
-                 {
-                     return std::any_of(ip.begin(), ip.end(), [&value](const int &oct)
-                     {
-                         return oct == value;
-                     });
-                 }
+//    https://en.cppreference.com/w/cpp/experimental/ranges/algorithm/copy
+    ranges::copy_if(ip_pool.begin(), ip_pool.end(), ranges::back_inserter(filtered_ip_pool), [&value](const auto ip)
+        {
+//        example with find:
+//        return ranges::find(ip, value) != ranges::end(ip);
+
+//       https://en.cppreference.com/w/cpp/experimental/ranges/algorithm/all_any_none_of
+            bool b = ranges::any_of(ip, [value](int i) { return value == i; });
+            return b;
+
+        }
     );
     return filtered_ip_pool;
 }
